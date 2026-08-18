@@ -1,0 +1,59 @@
+# CBOR (RFC 8949) major-type / well-known-byte dictionary for libFuzzer.
+# Tokens are the leading bytes that select each CBOR major type + a few
+# high-value single/multi-byte markers (indefinite length, simple values,
+# common tag numbers). libFuzzer splices these in as mutation building
+# blocks; they are not full items by themselves.
+
+# Major type 0 -- unsigned int (small, and the 1/2/4/8-byte length forms)
+"\x00"
+"\x17"
+"\x18"
+"\x19"
+"\x1a"
+"\x1b"
+
+# Major type 1 -- negative int
+"\x20"
+"\x37"
+"\x38"
+"\x39"
+"\x3a"
+"\x3b"
+
+# Major type 2 -- byte string (definite + indefinite)
+"\x40"
+"\x58"
+"\x5f"
+
+# Major type 3 -- text string (definite + indefinite)
+"\x60"
+"\x78"
+"\x7f"
+
+# Major type 4 -- array (definite + indefinite)
+"\x80"
+"\x98"
+"\x9f"
+
+# Major type 5 -- map (definite + indefinite)
+"\xa0"
+"\xb8"
+"\xbf"
+
+# Major type 6 -- tag (common tag numbers: 0/1 date, 2/3 bignum, 55799 self-describe)
+"\xc0"
+"\xc1"
+"\xc2"
+"\xc3"
+"\xd8"
+"\xd9\xd9\xf7"
+
+# Major type 7 -- simple/float (false/true/null/undef, half/single/double, break)
+"\xf4"
+"\xf5"
+"\xf6"
+"\xf7"
+"\xf9"
+"\xfa"
+"\xfb"
+"\xff"
